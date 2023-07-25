@@ -10,35 +10,34 @@
     <script>
         let getComputerChoice = () => {
             let gameChoices = ["scissors", "paper", "rock"];
-            let compChoice = gameChoices[Math.floor(Math.random()*3)]
-            return compChoice;
+            return gameChoices[Math.floor(Math.random()*3)];
         }
+
+        const compChoice = getComputerChoice();
 
         const playerSelection = prompt("Choose scissors, paper, or rock").toLowerCase();
 
-        console.log(playerSelection)
-
-            function playRound(playerSelection, getComputerChoice) {
+            function playRound(playerSelection, compChoice) {
                 if (playerSelection === 'rock') {
-                    if (getComputerChoice === 'rock') {
+                    if (compChoice === 'rock') {
                         return "It's a draw! We both chose rock";
-                    } else if (getComputerChoice === 'scissors') {
+                    } else if (compChoice === 'scissors') {
                         return "You win! Rock beats scissors";
                     } else {
                         return "You lose! Rock loses to paper";
                     }
                 } else if (playerSelection === 'paper') {
-                    if (getComputerChoice === 'paper') {
+                    if (compChoice === 'paper') {
                         return "It's a draw! We both chose paper";
-                    } else if (getComputerChoice === 'rock') {
+                    } else if (compChoice === 'rock') {
                         return "You win! Paper beats rock";
                     } else {
                         return "You lose! Paper loses to scissors";
                     }
                 } else if (playerSelection === 'scissors') {
-                    if (getComputerChoice === 'scissors') {
+                    if (compChoice === 'scissors') {
                         return "It's a draw! We both chose scissors";
-                    } else if (getComputerChoice === 'paper') {
+                    } else if (compChoice === 'paper') {
                         return "You win! Scissors beats paper";
                     } else {
                         return "You lose! Scissors loses to rock";
@@ -48,7 +47,17 @@
                 }
             }
 
-            console.log(playRound(playerSelection, getComputerChoice));
+        console.log(`You chose: ${playerSelection}`);
+        console.log(`The computer chose: ${compChoice}`)
+        
+        console.log(playRound(playerSelection, compChoice))
+
+        // function game() {
+        //     for (let i = 0; i < 5; i++) {
+        //         playRound(playerSelection, getComputerChoice)
+
+        //     }
+        // }
         
     </script>
     
