@@ -8,56 +8,87 @@
 <body>
 
     <script>
-        let getComputerChoice = () => {
-            let gameChoices = ["scissors", "paper", "rock"];
-            return gameChoices[Math.floor(Math.random()*3)];
-        }
+    
 
-        const compChoice = getComputerChoice();
+        function game() {
 
-        const playerSelection = prompt("Choose scissors, paper, or rock").toLowerCase();
+            // Prompt userChoice
 
-            function playRound(playerSelection, compChoice) {
-                if (playerSelection === 'rock') {
-                    if (compChoice === 'rock') {
-                        return "It's a draw! We both chose rock";
-                    } else if (compChoice === 'scissors') {
-                        return "You win! Rock beats scissors";
-                    } else {
-                        return "You lose! Rock loses to paper";
-                    }
-                } else if (playerSelection === 'paper') {
-                    if (compChoice === 'paper') {
-                        return "It's a draw! We both chose paper";
-                    } else if (compChoice === 'rock') {
-                        return "You win! Paper beats rock";
-                    } else {
-                        return "You lose! Paper loses to scissors";
-                    }
-                } else if (playerSelection === 'scissors') {
-                    if (compChoice === 'scissors') {
-                        return "It's a draw! We both chose scissors";
-                    } else if (compChoice === 'paper') {
-                        return "You win! Scissors beats paper";
-                    } else {
-                        return "You lose! Scissors loses to rock";
-                    }
-                } else {
-                    return "Please type either scissors, paper, or rock"
+            // Generate computerChoice
+            // Determine winner
+            // Display who won
+            // Add 1 to the winners score
+            // Display the scores at the end of each round
+            // Complete this 5 times
+            // Display the final winner
+
+            let totalGames = 0;
+            let playerScore = 0;
+            let compScore = 0;
+
+            while(totalGames != 5) {
+
+                let getComputerChoice = () => {
+                    let gameChoices = ["scissors", "paper", "rock"];
+                    return gameChoices[Math.floor(Math.random()*3)];
                 }
+                    
+                const playerSelection = prompt("Choose scissors, paper, or rock").toLowerCase();
+                const compChoice = getComputerChoice();
+
+                function playRound(playerSelection, compChoice) {
+                    if (playerSelection === 'rock') {
+                        if (compChoice === 'rock') {
+                            return "It's a draw! We both chose rock";
+                        } else if (compChoice === 'scissors') {
+                            playerScore++;
+                            return "You win! Rock beats scissors";
+                        } else {
+                            compScore++;
+                            return "You lose! Rock loses to paper";
+                        }
+                    } else if (playerSelection === 'paper') {
+                        if (compChoice === 'paper') {
+                            return "It's a draw! We both chose paper";
+                        } else if (compChoice === 'rock') {
+                            playerScore++;
+                            return "You win! Paper beats rock";
+                        } else {
+                            compScore++;
+                            return "You lose! Paper loses to scissors";
+                        }
+                    } else if (playerSelection === 'scissors') {
+                        if (compChoice === 'scissors') {
+                            return "It's a draw! We both chose scissors";
+                        } else if (compChoice === 'paper') {
+                            playerScore++;
+                            return "You win! Scissors beats paper";
+                        } else {
+                            compScore++;
+                            return "You lose! Scissors loses to rock";
+                        }
+                    } else {
+                        return "Please type either scissors, paper, or rock"
+                    }
+                }
+                
+                console.log(playRound(playerSelection, compChoice));
+                console.log(`Current score is Player(${playerScore}): Computer(${compScore})`);
+            
+                totalGames++;
+
             }
 
-        console.log(`You chose: ${playerSelection}`);
-        console.log(`The computer chose: ${compChoice}`)
-        
-        console.log(playRound(playerSelection, compChoice))
+            if (playerScore > compScore) {
+                console.log('You win in a 5 round match!');
+            } else if (playerScore < compScore) {
+                console.log('You lost in a 5 round match :(');
+            } else {
+                console.log('It was overall a draw out of 5 matches :O');
+            }
+        }
 
-        // function game() {
-        //     for (let i = 0; i < 5; i++) {
-        //         playRound(playerSelection, getComputerChoice)
-
-        //     }
-        // }
+        game();
         
     </script>
     
