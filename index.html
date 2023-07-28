@@ -7,88 +7,95 @@
 </head>
 <body>
 
+    <button id="scissors">Scissors</button>
+    <button id="paper">Paper</button>
+    <button id="rock">Rock</button>
+
+    <div class="results">Result: </div>
+    <div class="scoreboard">Scoreboard: </div>
+    <h1 class="winner"></h1>
+
     <script>
     
+    let currentPoints = 0;
+    let compPoints = 0;
 
-        function game() {
-
-            // Prompt userChoice
-
-            // Generate computerChoice
-            // Determine winner
-            // Display who won
-            // Add 1 to the winners score
-            // Display the scores at the end of each round
-            // Complete this 5 times
-            // Display the final winner
-
-            let totalGames = 0;
-            let playerScore = 0;
-            let compScore = 0;
-
-            while(totalGames != 5) {
-
-                let getComputerChoice = () => {
+        let playerSelection = 'blank';
+        let getComputerChoice = () => {
                     let gameChoices = ["scissors", "paper", "rock"];
                     return gameChoices[Math.floor(Math.random()*3)];
                 }
-                    
-                const playerSelection = prompt("Choose scissors, paper, or rock").toLowerCase();
-                const compChoice = getComputerChoice();
+        const scissors = document.querySelector('#scissors');
+        const paper = document.querySelector('#paper');
+        const rock = document.querySelector('#rock');
+        const results = document.querySelector('.results');
+        const scoreboard = document.querySelector('.scoreboard');
+        const winner = document.querySelector('.winner');
+        scissors.addEventListener('click', () => {
+            playerSelection = 'scissors';
+            contentDisplay(playerSelection);
+        })  
+        paper.addEventListener('click', () => {
+            playerSelection = 'paper';
+            contentDisplay(playerSelection);
+        })    
+        rock.addEventListener('click', () => {
+            playerSelection = 'rock';
+            contentDisplay(playerSelection);
+        })
 
-                function playRound(playerSelection, compChoice) {
-                    if (playerSelection === 'rock') {
-                        if (compChoice === 'rock') {
-                            return "It's a draw! We both chose rock";
-                        } else if (compChoice === 'scissors') {
-                            playerScore++;
-                            return "You win! Rock beats scissors";
-                        } else {
-                            compScore++;
-                            return "You lose! Rock loses to paper";
-                        }
-                    } else if (playerSelection === 'paper') {
-                        if (compChoice === 'paper') {
-                            return "It's a draw! We both chose paper";
-                        } else if (compChoice === 'rock') {
-                            playerScore++;
-                            return "You win! Paper beats rock";
-                        } else {
-                            compScore++;
-                            return "You lose! Paper loses to scissors";
-                        }
-                    } else if (playerSelection === 'scissors') {
-                        if (compChoice === 'scissors') {
-                            return "It's a draw! We both chose scissors";
-                        } else if (compChoice === 'paper') {
-                            playerScore++;
-                            return "You win! Scissors beats paper";
-                        } else {
-                            compScore++;
-                            return "You lose! Scissors loses to rock";
-                        }
-                    } else {
-                        return "Please type either scissors, paper, or rock"
-                    }
-                }
-                
-                console.log(playRound(playerSelection, compChoice));
-                console.log(`Current score is Player(${playerScore}): Computer(${compScore})`);
-            
-                totalGames++;
-
+        function contentDisplay(playerSelection) {
+            let result = playRound(playerSelection, getComputerChoice());
+            if (currentPoints !== 5 && compPoints !== 5) {
+                results.textContent = `Result: ${result}`;
+                scoreboard.textContent = `Scoreboard: ${currentPoints} : ${compPoints}`;
             }
-
-            if (playerScore > compScore) {
-                console.log('You win in a 5 round match!');
-            } else if (playerScore < compScore) {
-                console.log('You lost in a 5 round match :(');
-            } else {
-                console.log('It was overall a draw out of 5 matches :O');
-            }
+            else if (currentPoints === 5) {
+                results.textContent = ``;
+                scoreboard.textContent = '';
+                winner.textContent = 'CONGRATS! YOU BEAT THE COMPUTER TO 5 POINTS';
+            } else if (compPoints === 5) {
+                results.textContent = ``;
+                scoreboard.textContent = '';
+                winner.textContent = 'BRUH YOU LOST TO A COMPUTER!';
+            } 
         }
-
-        game();
+        
+        function playRound(playerSelection, compChoice) {
+            if (playerSelection === 'rock') {
+                if (compChoice === 'rock') {
+                    return "It's a draw! We both chose rock";
+                } else if (compChoice === 'scissors') {
+                    currentPoints++;
+                    return "You win! Rock beats scissors";
+                } else {
+                    compPoints++;
+                    return "You lose! Rock loses to paper";
+                }
+            } else if (playerSelection === 'paper') {
+                if (compChoice === 'paper') {
+                    return "It's a draw! We both chose paper";
+                } else if (compChoice === 'rock') {
+                    currentPoints++;
+                    return "You win! Paper beats rock";
+                } else {
+                    compPoints++;
+                    return "You lose! Paper loses to scissors";
+                }
+             } else if (playerSelection === 'scissors') {
+                if (compChoice === 'scissors') {
+                    return "It's a draw! We both chose scissors";
+                } else if (compChoice === 'paper') {
+                    currentPoints++;
+                    return "You win! Scissors beats paper";
+                } else {
+                    compPoints++;
+                    return "You lose! Scissors loses to rock";
+                }
+            } else {
+                return "Please type either scissors, paper, or rock"
+            }
+        } 
         
     </script>
     
